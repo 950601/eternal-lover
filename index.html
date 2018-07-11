@@ -1,7 +1,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <!-- saved from url=(0027)http://itzoo.info/love.html -->
 <html xml:lang="en" xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Ching</title>
+        <title>Secret Place</title>
         
         <link type="text/css" rel="stylesheet" href="Love_files/default.css">
         <script type="text/javascript" src="Love_files/jquery.min.js"></script>
@@ -13,7 +13,10 @@
         <script type="text/javascript" src="Love_files/jscex-async-powerpack.min.js"></script>
         <script type="text/javascript" src="Love_files/functions.js" charset="utf-8"></script>
         <script type="text/javascript" src="Love_files/love.js" charset="utf-8"></script>
+        <script type="text/javascript" src="Love_files/md5.js" charset="utf-8"></script>
+        <script type="text/javascript" src="Love_files/layer/layer.js" charset="utf-8"></script>
 
+        <link rel="stylesheet" href="Love_files/layui.css">
 		<link rel="shortcut icon" href="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1493300058833&di=5c3ad66db7e252888d9224f641d5e5e0&imgtype=0&src=http%3A%2F%2Fimage.xxdd.com%2Fxxdd%2Fgoods%2F1200%2F751d0560a45c4362b2b429617db54827.png" type="image/x-icon" />
     </head>
     <body>
@@ -26,31 +29,35 @@ A.applink       {border: 2px dotted #DCE6F4;padding:2px;color:#2F5BFF;background
 A.info          {color:#2F5BFF;background:transparent;text-decoration:none}
 A.info:hover    {color:green;background:transparent;text-decoration:underline}
 </style>
+       
+
+
+
         <div id="main">
-            <div id="error">您使用的浏览器无法支持即将显示的内容，请换成谷歌(<a href="http://www.google.cn/chrome/intl/zh-CN/landing_chrome.html?hl=zh-CN&brand=CHMI">Chrome</a>)或者火狐(<a href="http://firefox.com.cn/download/">Firefox</a>)浏览器~</div>
+            <div id="error">你使用的浏览器无法支持即将显示的内容，请换成谷歌(<a href="http://www.google.cn/chrome/intl/zh-CN/landing_chrome.html?hl=zh-CN&brand=CHMI">Chrome</a>)或者火狐(<a href="http://firefox.com.cn/download/">Firefox</a>)浏览器~</div>
             <div id="wrap">
                <div id="text">
                     <div id="code">                 
 					
                     <span class="say">那一晚天上有云彩没有星</span><br>
-                    <span class="say">你搀了我的手牵动我的心</span><br>
+                    <span class="say">你触了我的手牵动我的心</span><br>
                     <span class="say">天晓得我不敢说我爱你</span><br>
                     <span class="say">为了我是那样年青</span><br><br>
 
-                    <span class="say">那一晚你同我在黑巷里走</span><br> 
+                    <span class="say">那一晚你同我在操场上走</span><br> 
 					<span class="say">肩并肩，你的手牵住我的手</span> <br>             
-                    <span class="say">天晓得我不敢说我爱你</span><br>
-                    <span class="say">把这句话压在心头</span><br><br>
+                    <span class="say">天晓得我开口说我爱你</span><br>
+                    <span class="say">是怎么样的感觉在心头</span><br><br>
 
-                    <span class="say">那一晚是一生难忘的错恨</span><br>
+                    <span class="say">那一晚是一生难忘的爱恨</span><br>
                     <span class="say">上帝偷取了年青人的灵魂</span><br>
                     <span class="say">如今我一万声说我爱你</span><br>
-                    <span class="say">却难再挨近你的身</span><br>
-                    <span class="say"><span class="space"></span> -- 《那一晚》 :)</span>
+                    <span class="say">是如此地接近你的身</span><br>
+                    <span class="say"><span  class="space"></span > --《那一晚》 :)</span>
                     </div>
                 </div>
                 <div id="clock-box">
-                    <a href="http://zhongguose.com/#zaohong" target="_blank">@Ching</a> 与 <a href="http://zhongguose.com/#qianhaichanglan" target="_blank">@Ming</a> 在一起的
+                    <a href="http://zhongguose.com/#zaohong"  target="_blank">@徐明</a> 与 <a  href="http://zhongguose.com/#qianhaichanglan" target="_blank">@楚滢</a> 在一起的
                         <div id="clock"></div>
                 </div>
                 <canvas id="canvas" width="1100" height="680"></canvas>
@@ -118,15 +125,32 @@ A.info:hover    {color:green;background:transparent;text-decoration:underline}
         var hold = 1;
 
         canvas.click(function(e) {
-            var offset = canvas.offset(), x, y;
-            x = e.pageX - offset.left;
-            y = e.pageY - offset.top;
-            if (seed.hover(x, y)) {
-                hold = 0; 
-                canvas.unbind("click");
-                canvas.unbind("mousemove");
-                canvas.removeClass('hand');
+           
+            layer.open({
+            title:'任意门',
+            content: '<input class="layui-input"  id="pass_code" placeholder="输入神秘代码解锁"></input>',
+            btn: ['好了'],
+            yes: function(index, layero){
+
+                if(hex_md5($("#pass_code").val()) != 'abaf4e2cc0a4950ae44bd9fe659656f1'){
+                    $("#pass_code").val("是不是弄错了？(>＿<)");
+                    return;
+                }else{
+                    
+                    var offset = canvas.offset(), x, y;
+                    x = e.pageX - offset.left;
+                    y = e.pageY - offset.top;
+                    if (seed.hover(x, y)) {
+                        hold = 0; 
+                        canvas.unbind("click");
+                        canvas.unbind("mousemove");
+                        canvas.removeClass('hand');
+                    }
+                    layer.close(index); 
+                }
             }
+            });
+           
         }).mousemove(function(e){
             var offset = canvas.offset(), x, y;
             x = e.pageX - offset.left;
